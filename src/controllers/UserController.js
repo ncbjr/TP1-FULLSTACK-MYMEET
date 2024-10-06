@@ -30,4 +30,4 @@ class UserController {
 
 //Singleton
 
-module.exports = use.UserController();
+module.exports = new UserController();
