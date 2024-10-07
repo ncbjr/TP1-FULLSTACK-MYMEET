@@ -36,14 +36,14 @@ class UserController {
         try{
             const {email, password} = request.body;
             const user = await userService.authenticateUser(email, password);
-            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
-              
-            // Enviar o token no cabeçalho da resposta
-            //response.set('Authorization', `Bearer ${token}`);
+    
+            // Inclua o nome do usuário no token
+            const token = jwt.sign({id: user._id, name: user.name}, process.env.JWT_SECRET, {expiresIn: '1d'});
+            
             response.cookie('token', token, {
                 sameSite: 'none',
                 httpOnly: false
-            })
+            });
             response.status(200).json(`Bearer ${token}`);
         }
         catch (error){
