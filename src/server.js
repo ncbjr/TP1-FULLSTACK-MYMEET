@@ -1,4 +1,6 @@
 const express = require("express");
+const http = require("http");
+const { initializeSocket } = require("./services/socketService");
 const cookieParser = require('cookie-parser');
 const connectMongo = require("./config/mongo");
 
@@ -7,6 +9,8 @@ const roomRoutes = require("./routes/RoomRoutes");
 
 
 const app = express();
+const server = http.createServer(app);
+
 app.use(express.json());
 app.use(cookieParser());  // Adiciona o middleware de cookies
 
@@ -18,6 +22,8 @@ connectMongo();
 /*app.get("/", (request, response)=>{
     response.send({message: "Hello word"})
 });*/
+
+initializeSocket(server);
 
 app.listen(3000, ()=>{
     console.log("Servidor rodando na porta 3000.")
