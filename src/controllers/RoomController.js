@@ -34,8 +34,7 @@ class RoomController {
             if (!room) {
                 return res.status(404).json({ message: 'Sala não encontrada' });
             }
-            // Lógica para adicionar usuários à sala, se necessário
-            res.status(200).json({ message: `Entrou na sala ${roomId}` });
+            res.status(200).json({ message: `Entrou na sala '${room.name}: ${room._id}'` });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
