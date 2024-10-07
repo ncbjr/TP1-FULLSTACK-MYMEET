@@ -69,12 +69,14 @@
             socket = io('http://localhost:3000', { 
                 query: { token }
             });
+            console.log('Conectado ao servidor');
 
             socket.on('broadcast', message => {
                 const messagesDiv = document.getElementById('messages');
                 messagesDiv.innerHTML += `<div class="message">${message}</div>`;
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
             });
+            console.log('Broadcast de conexão enviado.');
         }
 
         async function showRooms() {
@@ -117,6 +119,7 @@
             document.getElementById('rooms').style.display = 'none';
             document.getElementById('chat').style.display = 'block';
             document.getElementById('roomName').innerText = room.name;
+            console.log('Broadcast de entrada enviado.');
         }
 
         function sendMessage() {
